@@ -4,9 +4,35 @@
 #include "stdafx.h"
 // Split the array into two parts
 int split(int *a, int low, int high);
+// Quicksort
 void quicksort(int *a, int low, int high);
 int main()
 {
+	int *array;
+	int Size = 0;
+	srand((unsigned)time(NULL));
+
+	printf("Enter the size of array: ");
+	scanf_s("%d", &Size);
+
+	array = (int*)malloc(Size * sizeof(int));
+
+	// Generate element for array
+	printf("***Original array***\n");
+	for (int i = 0; i < Size; ++i)
+	{
+		array[i] = rand() % Size + 1;
+		printf("%d ", array[i]);
+	}
+	printf("\n");
+
+	quicksort(array, 0, Size - 1);
+	printf("***Ordered Array***\n");
+	for (int i = 0; i < Size; ++i)
+	{
+		printf("%d ", array[i]);
+	}		
+	printf("\n");
 
     return 0;
 }
@@ -21,7 +47,7 @@ int split(int * a, int low, int high)
 			high--;
 		if (low >= high)
 			break;
-		a[low++] = a[high];
+		a[low++] = a[high];	// Swap operation
 
 		while (low < high && part_element >= a[low])
 			low++;
@@ -29,7 +55,7 @@ int split(int * a, int low, int high)
 			break;
 		a[high--] = a[low];
 	}
-	a[high] = part_element;
+	a[high] = part_element;		// Swap operation
 	return high;
 }
 
